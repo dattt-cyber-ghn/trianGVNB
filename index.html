@@ -10,7 +10,26 @@
     text-align: center;
     font-family: Arial, sans-serif;
   }
+input[type="file"], button {
+    padding: 10px 20px; /* Tăng padding để nút to ra */
+    font-size: 18px;    /* Tăng cỡ chữ */
+    border-radius: 8px; 
+    cursor: pointer;
+    margin: 5px; /* Khoảng cách giữa các nút */
+}
 
+button {
+    background-color: #007bff; /* Màu nền xanh cho nút Tải ảnh về */
+    color: white;
+    border: none;
+}
+
+/* Đảm bảo nút Chọn tệp có màu nền để không bị vô hình trên nền trắng */
+input[type="file"] {
+    background-color: #f0f0f0; /* Màu nền xám nhạt */
+    color: #333; /* Chữ màu tối */
+    border: 1px solid #ccc;
+}
   #canvasContainer {
     position: relative;
     display: inline-block;
@@ -224,7 +243,7 @@
         ctx.drawImage(frame, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         // BƯỚC 2: CẬP NHẬT TỌA ĐỘ ẢNH (KHUNG TRÒN) - DÙNG GIÁ TRỊ ĐÃ TÍNH TOÁN
-        const circleX = 1370;    // X Gốc trên bên trái
+        const circleX = 1369;    // X Gốc trên bên trái
         const circleY = 390;     // Y Gốc trên bên trái
         const circleSize = 431;   // Đường kính
 
@@ -247,7 +266,7 @@
         ctx.textAlign = "center";
         
         const textX = 1590.56;          // Tâm X của vùng text (đã tăng từ 750)
-        const textYStart = 983;     // Chân chữ Dòng Tên (đã kéo lên trên)
+        const textYStart = 980;     // Chân chữ Dòng Tên (đã kéo lên trên)
         const lineHeight = 50;      // Khoảng cách dòng
         
         const finalFontSizeName = 42; // Cỡ chữ Tên
