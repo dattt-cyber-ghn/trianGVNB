@@ -132,7 +132,7 @@
     const canvas = document.getElementById("cardCanvas");
     const ctx = canvas.getContext("2d");
     const frame = new Image();  
-    frame.src = "frame 1.png";    
+    frame.src = "frame 2.png";    
 
     // BƯỚC 1: CẬP NHẬT KÍCH THƯỚC CANVAS (KHỚP VỚI 2000x1414 PX CỦA FRAME.PNG)
     const CANVAS_WIDTH = 2000;
@@ -224,8 +224,8 @@
         ctx.drawImage(frame, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         // BƯỚC 2: CẬP NHẬT TỌA ĐỘ ẢNH (KHUNG TRÒN) - DÙNG GIÁ TRỊ ĐÃ TÍNH TOÁN
-        const circleX = 1330.21;    // X Gốc trên bên trái
-        const circleY = 359.69;     // Y Gốc trên bên trái
+        const circleX = 1409.4;    // X Gốc trên bên trái
+        const circleY = 392.6;     // Y Gốc trên bên trái
         const circleSize = 431;   // Đường kính
 
         if (uploadedImg) {
@@ -246,8 +246,8 @@
         ctx.fillStyle = "#fff";  // Màu chữ
         ctx.textAlign = "center";
         
-        const textX = 1541.04;          // Tâm X của vùng text (đã tăng từ 750)
-        const textYStart = 945;     // Chân chữ Dòng Tên (đã kéo lên trên)
+        const textX = 1590.56;          // Tâm X của vùng text (đã tăng từ 750)
+        const textYStart = 971;     // Chân chữ Dòng Tên (đã kéo lên trên)
         const lineHeight = 50;      // Khoảng cách dòng
         
         const finalFontSizeName = 42; // Cỡ chữ Tên
