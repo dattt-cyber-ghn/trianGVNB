@@ -2,111 +2,166 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Thư mời</title>
+<title>TẠO THƯ MỜI</title>
 <style>
-  body {
-    background: #fff;
-    color: #333;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
+/* ======================================= */
+/* CẬP NHẬT: TIÊU ĐỀ, NÚT & TEXT INPUTS */
+/* ======================================= */
+  body {
+    background: #fff;
+    color: #333;
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Đổi font nhìn hiện đại hơn */
+    padding-bottom: 50px; /* Thêm padding dưới cho thoáng */
+  }
+
+  h2 {
+    color: #00b5f4; /* Màu xanh mới cho tiêu đề */
+    text-transform: uppercase; /* In hoa */
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+/* CÁC NÚT */
 input[type="file"], button {
-    padding: 10px 20px; /* Tăng padding để nút to ra */
-    font-size: 18px;    /* Tăng cỡ chữ */
-    border-radius: 8px; 
-    cursor: pointer;
-    margin: 5px; /* Khoảng cách giữa các nút */
+    padding: 12px 24px; /* Tăng padding */
+    font-size: 18px;    /* Tăng cỡ chữ */
+    border-radius: 8px; 
+    cursor: pointer;
+    margin: 10px; /* Khoảng cách rộng hơn */
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 button {
-    background-color: #007bff; /* Màu nền xanh cho nút Tải ảnh về */
-    color: white;
-    border: none;
+    background-color: #007bff; /* Màu nền xanh cho nút Tải ảnh về */
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+button:hover {
+    background-color: #0056b3;
 }
 
-/* Đảm bảo nút Chọn tệp có màu nền để không bị vô hình trên nền trắng */
 input[type="file"] {
-    background-color: #f0f0f0; /* Màu nền xám nhạt */
-    color: #333; /* Chữ màu tối */
-    border: 1px solid #ccc;
+    background-color: #f0f0f0; /* Màu nền xám nhạt */
+    color: #333; /* Chữ màu tối */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-  #canvasContainer {
-    position: relative;
-    display: inline-block;
-  }
 
-  canvas {
-    /* Đảm bảo canvas hiển thị vừa màn hình nhưng giữ tỉ lệ */
-    max-width: 90vw; 
-    height: auto;   
-  border: 2px solid #ccc; /* Viền sáng hơn */
-    border-radius: 10px;
-    background: #f0f0f0; /* Đã đổi thành XÁM NHẠT */
+/* ======================================= */
+/* CẬP NHẬT: INPUTS LỚN HƠN VÀ TRANG TRÍ */
+/* ======================================= */
+
+  .text-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Khoảng cách lớn hơn giữa các dòng */
+    margin: 20px auto;
+    align-items: center;
+    max-width: 500px; /* Giới hạn chiều rộng khung nhập liệu */
   }
-  
-  /* Khung kéo thả ảnh */
-  #cropControls {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #555;
-    border-radius: 8px;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 320px; 
-    margin: 10px auto;
-  }
 
-  #cropControls div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-  }
+  .text-inputs > div {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Khoảng cách giữa select và input tên */
+    width: 100%;
+  }
+  
+  .text-inputs select {
+    padding: 10px 15px; /* Tăng padding */
+    border-radius: 8px;
+    border: 2px solid #00b5f4; /* Viền màu xanh nổi bật */
+    text-align: center;
+    background-color: #00b5f4; /* Nền xanh */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    appearance: none; /* Ẩn mũi tên mặc định */
+    cursor: pointer;
+    width: 130px; /* Cân bằng chiều rộng */
+  }
 
-  .text-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 10px;
-    align-items: center;
-  }
+  .text-inputs input {
+    flex-grow: 1; /* Cho phép ô nhập tên và chức vụ mở rộng */
+    padding: 10px 15px; /* Tăng padding */
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    text-align: center;
+    background-color: #f9f9f9; /* Nền trắng ngà */
+    color: #333;
+    font-size: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset;
+  }
+  .text-inputs input:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: white;
+  }
 
-  .text-inputs > div {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-  }
-  
-  .text-inputs select {
-    padding: 6px;
-    border-radius: 6px;
-    border: 1px solid #888;
-    text-align: center;
-    background-color: #333;
-    color: white;
-    width: 100px; 
-  }
+  #line2, #line3 {
+    width: auto !important; /* Bỏ giới hạn width cũ */
+  }
 
-  .text-inputs input {
-    width: 300px;
-    padding: 6px;
-    border-radius: 6px;
-    border: 1px solid #888;
-    text-align: center;
-    background-color: transparent;
-    color: black;
-    margin: 0; 
-  }
+/* ======================================= */
+/* CÁC CSS KHÁC (GIỮ NGUYÊN HOẶC TỐI ƯU NHẸ) */
+/* ======================================= */
+  #canvasContainer {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
 
-  #line2 {
-    width: 200px;
-  }
+  canvas {
+    max-width: 90vw; 
+    height: auto;   
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  #cropControls {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 90%;
+    max-width: 400px; /* Giới hạn chiều rộng */
+    margin: 10px auto;
+    background: #f9f9f9;
+  }
+
+  #cropControls div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+  }
+
+  #cropControls input[type="range"] {
+    width: 90%;
+    -webkit-appearance: none;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+
+  #cropControls label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+  }
 </style>
 </head>
 <body>
-  <h2>Thư mời</h2>
+  <h2>TẠO THƯ MỜI</h2>
   <input type="file" id="upload" accept="image/*">
   <button onclick="downloadImage()">Tải ảnh về</button>
 
@@ -127,25 +182,21 @@ input[type="file"] {
   </div>
 
   <div class="text-inputs">
-    <div>
-      <select id="line1" onchange="drawAll()">
-        <option value="">-- Danh xưng --</option>
-        <option value="Anh">Anh</option>
-        <option value="Chị">Chị</option>
-        <option value="Mr.">Mr.</option>
-        <option value="Ms.">Ms.</option>
-        <option value="Ông">Ông</option>
-        <option value="Bà">Bà</option>
-        <option value="Bé">Bé</option> 
-      </select>
-      <input type="text" id="line2" placeholder="Tên của Anh/Chị">
-    </div>
-    <input type="text" id="line3" placeholder="Chức vụ (VD: L&D Executive)">
-  </div>
-
-  <div id="canvasContainer">
-    <canvas id="cardCanvas"></canvas>
-  </div>
+    <div>
+      <select id="line1" onchange="drawAll()">
+        <option value="">-- Danh xưng --</option>
+        <option value="Anh">Anh</option>
+        <option value="Chị">Chị</option>
+        <option value="Mr.">Mr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Ông">Ông</option>
+        <option value="Bà">Bà</option>
+        <option value="Bé">Bé</option> 
+      </select>
+      <input type="text" id="line2" placeholder="Tên của Anh/Chị">
+    </div>
+    <input type="text" id="line3" placeholder="Chức vụ (VD: L&D Executive)">
+  </div>
 
   <script>
     const canvas = document.getElementById("cardCanvas");
