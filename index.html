@@ -1,351 +1,600 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
 <meta charset="UTF-8">
+
 <title>TẠO THƯ MỜI</title>
+
 <style>
-/* ======================================= */
-/* CẬP NHẬT: TIÊU ĐỀ, NÚT & TEXT INPUTS */
-/* ======================================= */
-  body {
-    background: #fff;
-    color: #333;
-    text-align: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Đổi font nhìn hiện đại hơn */
-    padding-bottom: 50px; /* Thêm padding dưới cho thoáng */
-  }
 
-  h2 {
-    color: #00b5f4; /* Màu xanh mới cho tiêu đề */
-    text-transform: uppercase; /* In hoa */
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
+  body {
 
-/* CÁC NÚT */
+    background: #fff;
+
+    color: #333;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+  }
+
 input[type="file"], button {
-    padding: 12px 24px; /* Tăng padding */
-    font-size: 18px;    /* Tăng cỡ chữ */
-    border-radius: 8px; 
-    cursor: pointer;
-    margin: 10px; /* Khoảng cách rộng hơn */
-    transition: background-color 0.3s, transform 0.1s;
+
+    padding: 10px 20px; /* Tăng padding để nút to ra */
+
+    font-size: 18px;    /* Tăng cỡ chữ */
+
+    border-radius: 8px; 
+
+    cursor: pointer;
+
+    margin: 5px; /* Khoảng cách giữa các nút */
+
 }
+
+
 
 button {
-    background-color: #007bff; /* Màu nền xanh cho nút Tải ảnh về */
-    color: white;
-    border: none;
-    font-weight: bold;
+
+    background-color: #007bff; /* Màu nền xanh cho nút Tải ảnh về */
+
+    color: white;
+
+    border: none;
+
 }
-button:hover {
-    background-color: #0056b3;
-}
+
+
+
+/* Đảm bảo nút Chọn tệp có màu nền để không bị vô hình trên nền trắng */
 
 input[type="file"] {
-    background-color: #f0f0f0; /* Màu nền xám nhạt */
-    color: #333; /* Chữ màu tối */
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    background-color: #f0f0f0; /* Màu nền xám nhạt */
+
+    color: #333; /* Chữ màu tối */
+
+    border: 1px solid #ccc;
+
 }
 
-/* ======================================= */
-/* CẬP NHẬT: INPUTS LỚN HƠN VÀ TRANG TRÍ */
-/* ======================================= */
+  #canvasContainer {
 
-  .text-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 12px; /* Khoảng cách lớn hơn giữa các dòng */
-    margin: 20px auto;
-    align-items: center;
-    max-width: 500px; /* Giới hạn chiều rộng khung nhập liệu */
-  }
+    position: relative;
 
-  .text-inputs > div {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Khoảng cách giữa select và input tên */
-    width: 100%;
-  }
-  
-  .text-inputs select {
-    padding: 10px 15px; /* Tăng padding */
-    border-radius: 8px;
-    border: 2px solid #00b5f4; /* Viền màu xanh nổi bật */
-    text-align: center;
-    background-color: #00b5f4; /* Nền xanh */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    appearance: none; /* Ẩn mũi tên mặc định */
-    cursor: pointer;
-    width: 130px; /* Cân bằng chiều rộng */
-  }
+    display: inline-block;
 
-  .text-inputs input {
-    flex-grow: 1; /* Cho phép ô nhập tên và chức vụ mở rộng */
-    padding: 10px 15px; /* Tăng padding */
-    border-radius: 8px;
-    border: 2px solid #ccc;
-    text-align: center;
-    background-color: #f9f9f9; /* Nền trắng ngà */
-    color: #333;
-    font-size: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1) inset;
-  }
-  .text-inputs input:focus {
-    border-color: #007bff;
-    outline: none;
-    background-color: white;
-  }
+  }
 
-  #line2, #line3 {
-    width: auto !important; /* Bỏ giới hạn width cũ */
-  }
 
-/* ======================================= */
-/* CÁC CSS KHÁC (GIỮ NGUYÊN HOẶC TỐI ƯU NHẸ) */
-/* ======================================= */
-  #canvasContainer {
-    position: relative;
-    display: inline-block;
-    margin-top: 20px;
-  }
 
-  canvas {
-    max-width: 90vw; 
-    height: auto;   
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
-  
-  #cropControls {
-    margin-top: 10px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 90%;
-    max-width: 400px; /* Giới hạn chiều rộng */
-    margin: 10px auto;
-    background: #f9f9f9;
-  }
+  canvas {
 
-  #cropControls div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-  }
+    /* Đảm bảo canvas hiển thị vừa màn hình nhưng giữ tỉ lệ */
 
-  #cropControls input[type="range"] {
-    width: 90%;
-    -webkit-appearance: none;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
+    max-width: 90vw; 
 
-  #cropControls label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-  }
+    height: auto;   
+
+  border: 2px solid #ccc; /* Viền sáng hơn */
+
+    border-radius: 10px;
+
+    background: #f0f0f0; /* Đã đổi thành XÁM NHẠT */
+
+  }
+
+  
+
+  /* Khung kéo thả ảnh */
+
+  #cropControls {
+
+    margin-top: 10px;
+
+    padding: 10px;
+
+    border: 1px solid #555;
+
+    border-radius: 8px;
+
+    display: flex; 
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 320px; 
+
+    margin: 10px auto;
+
+  }
+
+
+
+  #cropControls div {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      width: 100%;
+
+  }
+
+
+
+  .text-inputs {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: 10px;
+
+    align-items: center;
+
+  }
+
+
+
+  .text-inputs > div {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 6px;
+
+  }
+
+  
+
+  .text-inputs select {
+
+    padding: 6px;
+
+    border-radius: 6px;
+
+    border: 1px solid #888;
+
+    text-align: center;
+
+    background-color: #333;
+
+    color: white;
+
+    width: 100px; 
+
+  }
+
+
+
+  .text-inputs input {
+
+    width: 300px;
+
+    padding: 6px;
+
+    border-radius: 6px;
+
+    border: 1px solid #888;
+
+    text-align: center;
+
+    background-color: transparent;
+
+    color: black;
+
+    margin: 0; 
+
+  }
+
+
+
+  #line2 {
+
+    width: 200px;
+
+  }
+
 </style>
+
 </head>
+
 <body>
+
   <h2>TẠO THƯ MỜI</h2>
+
   <input type="file" id="upload" accept="image/*">
+
   <button onclick="downloadImage()">Tải ảnh về</button>
 
+
+
   <div id="cropControls" style="display:none;">
+
     <h4>Điều chỉnh Ảnh (Chỉ hiện khi có ảnh)</h4>
+
     <div>
+
         <label for="zoomSlider">Phóng to/Thu nhỏ (Zoom):</label>
+
         <input type="range" id="zoomSlider" min="1" max="5" step="0.1" value="1" oninput="drawAll()">
+
     </div>
+
     <div>
+
         <label for="offsetX">Di chuyển Ngang (Offset X):</label>
+
         <input type="range" id="offsetX" min="-100" max="100" step="1" value="0" oninput="drawAll()">
+
     </div>
+
     <div>
+
         <label for="offsetY">Di chuyển Dọc (Offset Y):</label>
+
         <input type="range" id="offsetY" min="-100" max="100" step="1" value="0" oninput="drawAll()">
+
     </div>
+
   </div>
 
+
+
   <div class="text-inputs">
-    <div>
-      <select id="line1" onchange="drawAll()">
-        <option value="">-- Danh xưng --</option>
-        <option value="Anh">Anh</option>
-        <option value="Chị">Chị</option>
-        <option value="Mr.">Mr.</option>
-        <option value="Ms.">Ms.</option>
-        <option value="Ông">Ông</option>
-        <option value="Bà">Bà</option>
-        <option value="Bé">Bé</option> 
-      </select>
-      <input type="text" id="line2" placeholder="Tên của Anh/Chị">
-    </div>
-    <input type="text" id="line3" placeholder="Chức vụ (VD: L&D Executive)">
-  </div>
+
+    <div>
+
+      <select id="line1" onchange="drawAll()">
+
+        <option value="">-- Danh xưng --</option>
+
+        <option value="Anh">Anh</option>
+
+        <option value="Chị">Chị</option>
+
+        <option value="Mr.">Mr.</option>
+
+        <option value="Ms.">Ms.</option>
+
+        <option value="Ông">Ông</option>
+
+        <option value="Bà">Bà</option>
+
+        <option value="Bé">Bé</option> 
+
+      </select>
+
+      <input type="text" id="line2" placeholder="Tên của Anh/Chị">
+
+    </div>
+
+    <input type="text" id="line3" placeholder="Chức vụ (VD: L&D Executive)">
+
+  </div>
+
+
+
+  <div id="canvasContainer">
+
+    <canvas id="cardCanvas"></canvas>
+
+  </div>
+
+
 
   <script>
+
     const canvas = document.getElementById("cardCanvas");
+
     const ctx = canvas.getContext("2d");
+
     const frame = new Image();  
+
     frame.src = "frame 2.png";    
 
+
+
     // BƯỚC 1: CẬP NHẬT KÍCH THƯỚC CANVAS (KHỚP VỚI 2000x1414 PX CỦA FRAME.PNG)
+
     const CANVAS_WIDTH = 2000;
+
     const CANVAS_HEIGHT = 1414;
+
+
 
     let uploadedImg = null;
 
+
+
     const cropControls = {
+
         zoom: 1.0,
+
         offsetX: 0,
+
         offsetY: 0
+
     };
+
+
 
     frame.onload = function() {
+
         canvas.width = CANVAS_WIDTH;
+
         canvas.height = CANVAS_HEIGHT;
+
         drawAll();
+
     };
 
+
+
     document.getElementById("upload").addEventListener("change", (e) => {
+
         const file = e.target.files[0];
+
         if (!file) return;
+
         const reader = new FileReader();
+
         reader.onload = function(event) {
+
             uploadedImg = new Image();
+
             uploadedImg.onload = () => {
+
                 document.getElementById("cropControls").style.display = "flex";
+
                 document.getElementById("zoomSlider").value = 1.0;
+
                 document.getElementById("offsetX").value = 0;
+
                 document.getElementById("offsetY").value = 0;
+
                 cropControls.zoom = 1.0;
+
                 cropControls.offsetX = 0;
+
                 cropControls.offsetY = 0;
+
                 drawAll();
+
             };
+
             uploadedImg.src = event.target.result;
+
         };
+
         reader.readAsDataURL(file);
+
     });
+
+
 
     document.querySelectorAll("#cropControls input").forEach(input => {
+
         input.addEventListener("input", function() {
+
             cropControls.zoom = parseFloat(document.getElementById("zoomSlider").value);
+
             cropControls.offsetX = parseFloat(document.getElementById("offsetX").value);
+
             cropControls.offsetY = parseFloat(document.getElementById("offsetY").value);
+
             drawAll();
+
         });
+
     });
 
+
+
     // HÀM DRAW ADJUSTED IMAGE ĐÃ TỐI ƯU HÓA LOGIC ZOOm/PAN (Chỉ dùng 5 tham số)
+
     function drawAdjustedImage(img, destX, destY, destSize) {
+
         // 1. Tỷ lệ cơ bản để ảnh lấp đầy khung tròn (destSize)
+
         const ratio = Math.max(destSize / img.width, destSize / img.height);
+
         
+
         // 2. Kích thước ảnh sau khi áp dụng tỉ lệ base và zoom
+
         const scaledWidth = img.width * ratio * cropControls.zoom;
+
         const scaledHeight = img.height * ratio * cropControls.zoom;
 
+
+
         // 3. Tính toán vị trí bắt đầu vẽ để ảnh được căn giữa trong khung destSize
+
         const centerX = destX + destSize / 2;
+
         const centerY = destY + destSize / 2;
+
         let drawX = centerX - scaledWidth / 2;
+
         let drawY = centerY - scaledHeight / 2;
+
         
+
         // 4. Áp dụng Offset từ Slider
+
         const maxXMove = (scaledWidth - destSize) / 2;
+
         const maxYMove = (scaledHeight - destSize) / 2;
+
         
+
         drawX -= (cropControls.offsetX / 100) * maxXMove;
+
         drawY -= (cropControls.offsetY / 100) * maxYMove;
 
+
+
         // 5. Vẽ ảnh (ctx.clip() đã lo việc cắt hình tròn)
+
         ctx.drawImage(
+
             img,
+
             drawX, 
+
             drawY, 
+
             scaledWidth, 
+
             scaledHeight
+
         );
+
     }
+
+
 
     function drawAll() {
+
         const danhXung = document.getElementById("line1").value;
+
         const ten = document.getElementById("line2").value;
+
         const chucVu = document.getElementById("line3").value;
 
+
+
         // 1. Vẽ khung nền (đã được tự động co giãn 2000x1414)
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         ctx.drawImage(frame, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
+
+
         // BƯỚC 2: CẬP NHẬT TỌA ĐỘ ẢNH (KHUNG TRÒN) - DÙNG GIÁ TRỊ ĐÃ TÍNH TOÁN
+
         const circleX = 1369;    // X Gốc trên bên trái
+
         const circleY = 390;     // Y Gốc trên bên trái
+
         const circleSize = 431;   // Đường kính
 
+
+
         if (uploadedImg) {
+
             ctx.save(); 
+
             
+
             ctx.beginPath();
+
             // Tâm hình tròn: circleX + circleSize / 2, circleY + circleSize / 2
+
             ctx.arc(circleX + circleSize / 2, circleY + circleSize / 2, circleSize / 2, 0, Math.PI * 2, true);
+
             ctx.closePath();
+
             ctx.clip(); 
 
+
+
             drawAdjustedImage(uploadedImg, circleX, circleY, circleSize);
+
             
+
             ctx.restore(); 
+
         }
 
+
+
         // BƯỚC 3: CẬP NHẬT TỌA ĐỘ VĂN BẢN (TEXT) - Tối ưu cho bố cục 2000x1414
+
         ctx.fillStyle = "#fff";  // Màu chữ
+
         ctx.textAlign = "center";
+
         
+
         const textX = 1590.56;          // Tâm X của vùng text (đã tăng từ 750)
+
         const textYStart = 980;     // Chân chữ Dòng Tên (đã kéo lên trên)
+
         const lineHeight = 50;      // Khoảng cách dòng
+
         
+
         const finalFontSizeName = 42; // Cỡ chữ Tên
+
         const finalFontSizeJob = 35;  // Cỡ chữ Chức vụ
 
+
+
         // DÒNG 1: DANH XƯNG + TÊN
+
         const fullName = (danhXung ? danhXung + " " : "") + (ten || "Tên của Anh/Chị");
+
         ctx.font = `bold ${finalFontSizeName}px Arial`; 
+
         ctx.fillText(fullName, textX, textYStart);
 
+
+
         // DÒNG 2: CHỨC VỤ
+
         ctx.font = `${finalFontSizeJob}px Arial`; 
+
         ctx.fillText(chucVu || "Chức vụ", textX, textYStart + lineHeight);
+
     }
 
+
+
     document.getElementById("line2").addEventListener("input", drawAll);
+
     document.getElementById("line3").addEventListener("input", drawAll);
+
     
+
     // Thêm listener cho select để đảm bảo nó cũng kích hoạt drawAll
+
     document.getElementById("line1").addEventListener("change", drawAll);
 
 
+
+
+
     function downloadImage() {
+
         const link = document.createElement("a");
+
         link.download = "thiep-giang-vien.png";
+
         link.href = canvas.toDataURL("image/png");
+
         link.click();
+
     }
+
 </script>
+
 </body>
+
 </html>
+
